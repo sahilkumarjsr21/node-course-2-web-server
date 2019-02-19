@@ -1,9 +1,12 @@
 const express=require('express');
 const hbs= require('hbs');
 const fs=require('fs');
+const port=process.env.PORT || 3000;
 
 var app=express();
-
+/**
+ * script is nothing more than a command that we run from a commmand line. "scripts"->> in package.json
+ */
 hbs.registerPartials(__dirname+"/views/partials");
 hbs.registerHelper('getDate',()=>{
     return new Date().getFullYear();
@@ -76,6 +79,6 @@ app.get('/bad',(req,res)=>{
         bad:'Bad Request'
     });
 });
-app.listen(3000,()=>{
-    console.log("Server is up");
+app.listen(port,()=>{
+    console.log(`Server is up at ${port}`);
 });// bind the server to listen to the port on our machine or web server
