@@ -16,6 +16,10 @@ hbs.registerHelper('screamIt',(text)=>{
     return text.toUpperCase();
 });
 
+hbs.registerHelper('list',()=>{
+    return 'https://github.com/sahilkumarjsr21/node-course-2-web-server';
+});
+
 app.set('view engine','hbs');//key value pair (key,value)
 app.use(express.static(__dirname+"/public"));//MiddleWare.If express doesn't provide some functionality we can provide that functionality using a middleware 
 //and teach the express to use.It can do anything like executing a code like loggong into screen or changing req or res object
@@ -54,6 +58,8 @@ app.get('/',(req,res)=>{
         PageTitle:"This is Home Page",  
         pageJump:'/about',
         pageJumpName:'About',
+        project:'/projects',
+        projectPage:'project',
         //date:new Date().getFullYear(),
         pageDesc:'Yo this is home Page'
 
@@ -74,6 +80,16 @@ app.get('/about',(req,res)=>{
        pageJumpName:'Home',
        pageDesc:'yo this is about page'
    });
+});
+app.get("/projects",(req,res)=>{
+    res.render("projects.hbs",{
+        PageTitle:"Projects",
+        TitlePage:"Github Projects",
+        pageJump:'/',
+        pageDesc:'My github Projects listed as follows',
+        pageJumpName:"Home",
+        project:null,
+    });
 });
 app.get('/bad',(req,res)=>{
     res.send({
